@@ -1,6 +1,6 @@
 import dagre from 'dagre'
 import type { Node, Edge } from '@xyflow/react'
-import type { TreeProject } from '@/types/models'
+import type { TreeProject, Person, Union } from '@/types/models'
 
 export const NODE_WIDTH = 220
 export const NODE_HEIGHT = 90
@@ -9,6 +9,67 @@ export const UNION_SIZE = 16
 export interface TreeGraph {
   nodes: Node[]
   edges: Edge[]
+  generationMap: Record<string, number>
+}
+
+/**
+ * Computes generational depth (1, 2, 3...) for all persons in the tree.
+ * Roots (persons without parents) start at Generation 1.
+ * Partners are aligned to share the same generation.
+ */
+export function computeGenerations(persons: Person[], unions: Union[]): Record<string, number> {
+  const genMap: Record<string, number> = {}
+
+  // Map each child to their parent union
+  const parentMap: Record<string, string[]> = {}
+  for (const union of unions) {
+    for (const childId of union.childrenIds) {
+      if (!parentMap[childId]) parentMap[childId] = []
+      parentMap[childId].push(...union.partnerIds)
+    }
+  }
+
+  // True roots: persons with no recorded parents AND not married to someone who has parents
+  // First, initialize all persons
+  for (const p of persons) {
+    genMap[p.id] = 1
+  }
+
+  // Iteratively relax generations until convergence (DAG longest path)
+  let changed = true
+  let iterations = 0
+  const maxIterations = 50
+
+  while (changed && iterations < maxIterations) {
+    changed = false
+    iterations++
+
+    for (const union of unions) {
+      // Find the maximum generation among partners
+      const maxPartnerGen = Math.max(
+        ...union.partnerIds.map((pid) => genMap[pid] ?? 1),
+      )
+
+      // Align both partners to this maximum generation
+      for (const pid of union.partnerIds) {
+        if (genMap[pid] !== maxPartnerGen) {
+          genMap[pid] = maxPartnerGen
+          changed = true
+        }
+      }
+
+      // Children must be at least maxPartnerGen + 1
+      const childGen = maxPartnerGen + 1
+      for (const cid of union.childrenIds) {
+        if ((genMap[cid] ?? 1) < childGen) {
+          genMap[cid] = childGen
+          changed = true
+        }
+      }
+    }
+  }
+
+  return genMap
 }
 
 /**
@@ -17,15 +78,15 @@ export interface TreeGraph {
  */
 export function buildTreeLayout(project: TreeProject): TreeGraph {
   const { persons, unions, settings } = project
-
-  // If in manual mode and persons have non-zero positions, preserve them
   const isManual = settings.layout === 'manual'
+
+  const generationMap = computeGenerations(persons, unions)
 
   const g = new dagre.graphlib.Graph()
   g.setGraph({
     rankdir: 'TB',       // Top-to-Bottom generational flow
-    nodesep: 50,         // Horizontal separation between nodes on same rank
-    ranksep: 80,         // Vertical separation between generations
+    nodesep: 60,         // Horizontal separation between nodes on same rank
+    ranksep: 90,         // Vertical separation between generations
     marginx: 40,
     marginy: 40,
   })
@@ -48,19 +109,36 @@ export function buildTreeLayout(project: TreeProject): TreeGraph {
     for (const partnerId of union.partnerIds) {
       if (persons.some((p) => p.id === partnerId)) {
         g.setEdge(partnerId, unionNodeId)
+
+        // Show marriage year badge if present on first partner edge
+        const marriageYear = union.marriageDate
+          ? new Date(union.marriageDate).getFullYear()
+          : undefined
+
         edges.push({
           id: `e_${partnerId}_${unionNodeId}`,
           source: partnerId,
           target: unionNodeId,
           type: 'straight',
           style: { stroke: '#94a3b8', strokeWidth: 2 },
-          animated: false,
+          label: partnerId === union.partnerIds[0] && marriageYear ? `💍 ${marriageYear}` : undefined,
+          labelStyle: { fill: '#64748b', fontSize: 10, fontWeight: 600 },
+          labelBgStyle: { fill: '#ffffff', fillOpacity: 0.9, rx: 4, ry: 4 },
         })
       }
     }
 
-    // Edges from union to children
-    for (const childId of union.childrenIds) {
+    // Sort children chronologically by birth date (left to right)
+    const sortedChildrenIds = [...union.childrenIds].sort((aId, bId) => {
+      const pA = persons.find((p) => p.id === aId)
+      const pB = persons.find((p) => p.id === bId)
+      const dateA = pA?.birthDate ?? '9999-99-99'
+      const dateB = pB?.birthDate ?? '9999-99-99'
+      return dateA.localeCompare(dateB)
+    })
+
+    // Edges from union to sorted children
+    for (const childId of sortedChildrenIds) {
       if (persons.some((p) => p.id === childId)) {
         g.setEdge(unionNodeId, childId)
         edges.push({
@@ -91,7 +169,10 @@ export function buildTreeLayout(project: TreeProject): TreeGraph {
       id: person.id,
       type: 'person',
       position,
-      data: { person },
+      data: {
+        person,
+        generation: generationMap[person.id] ?? 1,
+      },
     })
   }
 
@@ -111,5 +192,5 @@ export function buildTreeLayout(project: TreeProject): TreeGraph {
     })
   }
 
-  return { nodes, edges }
+  return { nodes, edges, generationMap }
 }

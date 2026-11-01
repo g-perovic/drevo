@@ -40,10 +40,28 @@ function TreeCanvasInner({
   const project = useTreeStore((state) => state.project)
   const addPerson = useTreeStore((state) => state.addPerson)
   const updatePersonPosition = useTreeStore((state) => state.updatePersonPosition)
-  const { fitView } = useReactFlow()
+  const { fitView, zoomIn, zoomOut } = useReactFlow()
 
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([])
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([])
+
+  // Keyboard navigation for zoom in/out and fit view
+  useEffect(() => {
+    function handleCanvasKeys(e: KeyboardEvent) {
+      const isInput = ['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)
+      if (isInput) return
+
+      if (e.key === '=' || e.key === '+') {
+        zoomIn({ duration: 200 })
+      } else if (e.key === '-' || e.key === '_') {
+        zoomOut({ duration: 200 })
+      } else if (e.key === '0') {
+        fitView({ padding: 0.2, duration: 300 })
+      }
+    }
+    window.addEventListener('keydown', handleCanvasKeys)
+    return () => window.removeEventListener('keydown', handleCanvasKeys)
+  }, [zoomIn, zoomOut, fitView])
 
   // Recalculate layout whenever project persons or unions change
   useEffect(() => {
@@ -130,6 +148,8 @@ function TreeCanvasInner({
         onPaneClick={() => onSelectPerson(null)}
         fitView
         fitViewOptions={{ padding: 0.2 }}
+        snapToGrid={project.settings.snapToGrid ?? false}
+        snapGrid={[20, 20]}
         minZoom={0.2}
         maxZoom={2}
         proOptions={{ hideAttribution: true }}

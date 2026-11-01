@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildTreeLayout } from '@/utils/layout'
+import { buildTreeLayout, computeGenerations } from '@/utils/layout'
 import { createEmptyProject, type Person, type Union } from '@/types/models'
 
 describe('buildTreeLayout', () => {
@@ -52,6 +52,7 @@ describe('buildTreeLayout', () => {
       partnerIds: ['p_01', 'p_02'],
       childrenIds: ['p_03'],
       status: 'married',
+      marriageDate: '1985-05-10',
     }
 
     project.persons = [p1, p2, child]
@@ -70,5 +71,32 @@ describe('buildTreeLayout', () => {
     const parentNode = nodes.find((n) => n.id === 'p_01')!
     const childNode = nodes.find((n) => n.id === 'p_03')!
     expect(childNode.position.y).toBeGreaterThan(parentNode.position.y)
+
+    // Partner edge should include marriage year label
+    expect(edges.some((e) => e.label === '💍 1985')).toBe(true)
+  })
+
+  it('correctly calculates generational depth across 3 generations', () => {
+    const grandparents: Person[] = [
+      { id: 'gf', firstName: 'GF', isDeceased: false, position: { x: 0, y: 0 } },
+      { id: 'gm', firstName: 'GM', isDeceased: false, position: { x: 0, y: 0 } },
+    ]
+    const parents: Person[] = [
+      { id: 'f', firstName: 'F', isDeceased: false, position: { x: 0, y: 0 } },
+      { id: 'm', firstName: 'M', isDeceased: false, position: { x: 0, y: 0 } },
+    ]
+    const child: Person = { id: 'c', firstName: 'C', isDeceased: false, position: { x: 0, y: 0 } }
+
+    const unions: Union[] = [
+      { id: 'u1', partnerIds: ['gf', 'gm'], childrenIds: ['f'], status: 'married' },
+      { id: 'u2', partnerIds: ['f', 'm'], childrenIds: ['c'], status: 'married' },
+    ]
+
+    const genMap = computeGenerations([...grandparents, ...parents, child], unions)
+    expect(genMap['gf']).toBe(1)
+    expect(genMap['gm']).toBe(1)
+    expect(genMap['f']).toBe(2)
+    expect(genMap['m']).toBe(2)
+    expect(genMap['c']).toBe(3)
   })
 })

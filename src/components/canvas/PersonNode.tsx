@@ -1,12 +1,13 @@
 import { memo, useState } from 'react'
 import { Handle, Position } from '@xyflow/react'
-import { User, Plus, Heart, Baby, Users } from 'lucide-react'
+import { Plus, Heart, Baby, Users } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import type { Person } from '@/types/models'
 import { formatLifespan, getDisplayName } from '@/types/models'
 
 export interface PersonNodeData {
   person: Person
+  generation?: number
   isSelected?: boolean
   onSelect?: (personId: string) => void
   onQuickAdd?: (type: 'parent' | 'child' | 'spouse' | 'sibling', personId: string) => void
@@ -17,22 +18,30 @@ export const PersonNode = memo(function PersonNode({
 }: {
   data: PersonNodeData
 }) {
-  const { t } = useTranslation()
-  const { person, isSelected, onSelect, onQuickAdd } = data
+  const { t, i18n } = useTranslation()
+  const { person, generation, isSelected, onSelect, onQuickAdd } = data
   const [showActions, setShowActions] = useState(false)
 
   if (!person) return null
 
   const genderColor =
     person.gender === 'male'
-      ? 'border-blue-400 bg-blue-50/40 text-blue-700'
+      ? 'border-blue-300 bg-blue-50 text-blue-700'
       : person.gender === 'female'
-        ? 'border-rose-400 bg-rose-50/40 text-rose-700'
-        : 'border-emerald-400 bg-emerald-50/40 text-emerald-700'
+        ? 'border-rose-300 bg-rose-50 text-rose-700'
+        : 'border-emerald-300 bg-emerald-50 text-emerald-700'
 
   const borderClass = isSelected
     ? 'ring-2 ring-tree-500 ring-offset-2 border-tree-500 shadow-md'
-    : 'border-gray-200 hover:border-gray-300 shadow-sm'
+    : 'border-gray-200 hover:border-gray-300 hover:shadow shadow-sm'
+
+  const initials = [person.firstName?.[0], person.lastName?.[0]]
+    .filter(Boolean)
+    .join('')
+    .toUpperCase()
+
+  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+  const genLabel = generation && generation <= 10 ? `Gen ${romanNumerals[generation - 1]}` : `Gen ${generation}`
 
   return (
     <div
@@ -67,11 +76,18 @@ export const PersonNode = memo(function PersonNode({
         className="!w-3 !h-3 !bg-slate-400 !border-2 !border-white"
       />
 
+      {/* Generation Tag */}
+      {generation !== undefined && (
+        <div className="absolute top-2 right-2 text-[9px] font-semibold text-gray-400 bg-gray-50 border border-gray-100 rounded px-1.5 py-0.5">
+          {genLabel}
+        </div>
+      )}
+
       {/* Card Content */}
       <div className="flex items-center gap-3">
         {/* Avatar */}
         <div
-          className={`w-10 h-10 rounded-full border flex items-center justify-center flex-shrink-0 overflow-hidden ${genderColor}`}
+          className={`w-10 h-10 rounded-full border flex items-center justify-center flex-shrink-0 overflow-hidden font-semibold text-xs tracking-wider ${genderColor}`}
         >
           {person.photoUrl ? (
             <img
@@ -80,30 +96,36 @@ export const PersonNode = memo(function PersonNode({
               className="w-full h-full object-cover"
             />
           ) : (
-            <User className="w-5 h-5 opacity-70" />
+            <span>{initials || '?'}</span>
           )}
         </div>
 
         {/* Text Details */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 pr-6">
           <div className="text-sm font-semibold text-gray-900 truncate">
             {getDisplayName(person) || t('person.unknown')}
+            {person.maidenName && (
+              <span className="text-[11px] font-normal text-gray-500 ml-1">
+                ({i18n.language === 'sl' ? 'roj.' : 'née'} {person.maidenName})
+              </span>
+            )}
           </div>
-          <div className="text-xs text-gray-500 font-mono">
-            {formatLifespan(person)}
+          <div className="text-xs text-gray-500 font-mono flex items-center gap-1">
+            {person.isDeceased && <span className="text-[10px] text-gray-400 font-sans">†</span>}
+            <span>{formatLifespan(person)}</span>
           </div>
           {person.birthPlace && (
-            <div className="text-[11px] text-gray-400 truncate">
+            <div className="text-[10px] text-gray-400 truncate">
               📍 {person.birthPlace}
             </div>
           )}
         </div>
       </div>
 
-      {/* Contextual Quick-Add Action Bar (Milestone 3 / Job 3.1) */}
+      {/* Contextual Quick-Add Action Bar */}
       {showActions && onQuickAdd && (
         <div
-          className="absolute -bottom-9 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-white border border-gray-200 rounded-lg shadow-lg px-2 py-1 z-30"
+          className="absolute -bottom-9 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-white border border-gray-200 rounded-lg shadow-lg px-2 py-1 z-30 animate-in fade-in zoom-in-95 duration-100"
           onClick={(e) => e.stopPropagation()}
         >
           <button
