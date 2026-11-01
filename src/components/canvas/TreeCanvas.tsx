@@ -88,11 +88,11 @@ function TreeCanvasInner({
 
   const handleAddFirstPerson = useCallback(() => {
     const id = addPerson({
-      firstName: t('tree.emptyStateAction'),
+      firstName: 'New Person',
       position: { x: 0, y: 0 },
     })
     onSelectPerson(id)
-  }, [addPerson, onSelectPerson, t])
+  }, [addPerson, onSelectPerson])
 
   // Empty state if tree has no people
   if (project.persons.length === 0) {

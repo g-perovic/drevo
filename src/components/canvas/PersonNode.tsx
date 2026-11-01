@@ -21,6 +21,8 @@ export const PersonNode = memo(function PersonNode({
   const { person, isSelected, onSelect, onQuickAdd } = data
   const [showActions, setShowActions] = useState(false)
 
+  if (!person) return null
+
   const genderColor =
     person.gender === 'male'
       ? 'border-blue-400 bg-blue-50/40 text-blue-700'

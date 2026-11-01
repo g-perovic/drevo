@@ -4,6 +4,7 @@ import { temporal } from 'zundo'
 import { nanoid } from 'nanoid'
 import type { TreeProject, Person, Union, PersonInput, ProjectMeta } from '@/types/models'
 import { createEmptyProject, TreeProjectSchema } from '@/types/models'
+import { SAMPLE_FAMILY_TREE } from '@/data/sampleTree'
 
 // ─── State shape ─────────────────────────────────────────────────────────────
 
@@ -41,7 +42,7 @@ interface TreeActions {
 // ─── Initial state ───────────────────────────────────────────────────────────
 
 const initialState: TreeState = {
-  project: createEmptyProject(),
+  project: SAMPLE_FAMILY_TREE,
   currentFilePath: null,
   isDirty: false,
 }
