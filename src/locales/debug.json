@@ -1,0 +1,119 @@
+{
+  "app": {
+    "name": "[!! Ďŕévó !!]",
+    "tagline": "[!! Šîmpĺé fàmîĺŷ ţŕéé čŕéàţîón !!]",
+    "milestone": "[!! Mîĺéšţóné {{milestone}} !!]"
+  },
+  "nav": {
+    "newProject": "[!! Ñéŵ Pŕójéčţ !!]",
+    "openProject": "[!! Ópén Pŕójéčţ !!]",
+    "save": "[!! Šàvé !!]",
+    "saveAs": "[!! Šàvé Àš !!]",
+    "export": "[!! Éxpóŕţ !!]",
+    "exportPdf": "[!! Éxpóŕţ PĎF !!]",
+    "exportPng": "[!! Éxpóŕţ PÑĢ !!]",
+    "exportSvg": "[!! Éxpóŕţ ŠVĢ !!]",
+    "settings": "[!! Šéţţîñĝš !!]",
+    "language": "[!! Ĺàñĝûàĝé !!]"
+  },
+  "tree": {
+    "addPerson": "[!! Àďď Péŕšón !!]",
+    "addParent": "[!! Àďď Pàŕéñţ !!]",
+    "addChild": "[!! Àďď Čhîĺď !!]",
+    "addSpouse": "[!! Àďď Špóûšé !!]",
+    "addSibling": "[!! Àďď Šîbĺîñĝ !!]",
+    "deletePerson": "[!! Ďéĺéţé Péŕšón !!]",
+    "fitToScreen": "[!! Fîţ ţó Ščŕééñ !!]",
+    "zoomIn": "[!! Žóóm Îñ !!]",
+    "zoomOut": "[!! Žóóm Óûţ !!]",
+    "autoLayout": "[!! Àûţó Ĺàŷóûţ !!]",
+    "search": "[!! Šéàŕčh péópĺé... !!]",
+    "emptyState": "[!! Ñó péópĺé àďďéď ŷéţ. Šţàŕţ bŷ àďďîñĝ à péŕšón. !!]",
+    "emptyStateAction": "[!! Àďď Fîŕšţ Péŕšón !!]"
+  },
+  "person": {
+    "firstName": "[!! Fîŕšţ Ñàmé !!]",
+    "middleName": "[!! Mîďďĺé Ñàmé !!]",
+    "lastName": "[!! Ĺàšţ Ñàmé !!]",
+    "maidenName": "[!! Màîďéñ Ñàmé !!]",
+    "gender": "[!! Ĝéñďéŕ !!]",
+    "genderMale": "[!! Màĺé !!]",
+    "genderFemale": "[!! Fémàĺé !!]",
+    "genderOther": "[!! Óţhéŕ !!]",
+    "birthDate": "[!! Ďàţé óf Bîŕţh !!]",
+    "birthPlace": "[!! Pĺàčé óf Bîŕţh !!]",
+    "deathDate": "[!! Ďàţé óf Ďéàţh !!]",
+    "deathPlace": "[!! Pĺàčé óf Ďéàţh !!]",
+    "isDeceased": "[!! Ďéčéàšéď !!]",
+    "isAlive": "[!! Àĺîvé !!]",
+    "photo": "[!! Phóţó !!]",
+    "notes": "[!! Ñóţéš !!]",
+    "biography": "[!! Bîóĝŕàphŷ !!]",
+    "present": "[!! Pŕéšéñţ !!]",
+    "unknown": "[!! Ûñkñóŵñ !!]"
+  },
+  "union": {
+    "marriageDate": "[!! Ďàţé óf Màŕŕîàĝé !!]",
+    "marriagePlace": "[!! Pĺàčé óf Màŕŕîàĝé !!]",
+    "status": "[!! Réĺàţîóñšhîp Šţàţûš !!]",
+    "statusMarried": "[!! Màŕŕîéď !!]",
+    "statusPartner": "[!! Pàŕţñéŕ !!]",
+    "statusSeparated": "[!! Šépàŕàţéď !!]",
+    "statusDivorced": "[!! Ďîvóŕčéď !!]"
+  },
+  "export": {
+    "title": "[!! Éxpóŕţ Fàmîĺŷ Ţŕéé !!]",
+    "pdfOptions": "[!! PĎF Ópţîóñš !!]",
+    "pageSize": "[!! Pàĝé Šîžé !!]",
+    "orientation": "[!! Óŕîéñţàţîóñ !!]",
+    "orientationLandscape": "[!! Ĺàñďščàpé !!]",
+    "orientationPortrait": "[!! Póŕţŕàîţ !!]",
+    "treeTitle": "[!! Ţŕéé Ţîţĺé !!]",
+    "includeDate": "[!! Îñčĺûďé Ďàţé !!]",
+    "exportButton": "[!! Éxpóŕţ !!]",
+    "cancel": "[!! Čàñčéĺ !!]"
+  },
+  "actions": {
+    "save": "[!! Šàvé !!]",
+    "cancel": "[!! Čàñčéĺ !!]",
+    "delete": "[!! Ďéĺéţé !!]",
+    "confirm": "[!! Čóñfîŕm !!]",
+    "close": "[!! Čĺóšé !!]",
+    "edit": "[!! Éďîţ !!]",
+    "add": "[!! Àďď !!]",
+    "undo": "[!! Ûñďó !!]",
+    "redo": "[!! Réďó !!]"
+  },
+  "dialogs": {
+    "unsavedChanges": "[!! Ŷóû hàvé ûñšàvéď čhàñĝéš. Ďó ŷóû ŵàñţ ţó šàvé béfóŕé čóñţîñûîñĝ? !!]",
+    "deletePersonTitle": "[!! Ďéĺéţé Péŕšón !!]",
+    "deletePersonMessage": "[!! Àŕé ŷóû šûŕé ŷóû ŵàñţ ţó ďéĺéţé {{name}}? Ţhîš čàññóţ bé ûñďóñé. !!]",
+    "newProjectTitle": "[!! Ñéŵ Pŕójéčţ !!]",
+    "newProjectMessage": "[!! Ţhîš ŵîĺĺ čĺéàŕ ţhé čûŕŕéñţ ţŕéé. Čóñţîñûé? !!]"
+  },
+  "shortcuts": {
+    "title": "[!! Kéŷbóàŕď Šhóŕţčûţš !!]",
+    "save": "[!! Šàvé !!]",
+    "undo": "[!! Ûñďó !!]",
+    "redo": "[!! Réďó !!]",
+    "delete": "[!! Ďéĺéţé šéĺéčţéď !!]",
+    "search": "[!! Šéàŕčh !!]",
+    "fitToScreen": "[!! Fîţ ţó ščŕééñ !!]"
+  },
+  "settings": {
+    "title": "[!! Šéţţîñĝš !!]",
+    "language": "[!! Ĺàñĝûàĝé !!]",
+    "theme": "[!! Ţhémé !!]",
+    "themeLight": "[!! Ĺîĝhţ !!]",
+    "themeDark": "[!! Ďàŕk !!]",
+    "themeSystem": "[!! Šŷšţém !!]",
+    "autoSave": "[!! Àûţó-šàvé !!]",
+    "snapToGrid": "[!! Šñàp ţó Ĝŕîď !!]"
+  },
+  "errors": {
+    "invalidFile": "[!! Îñvàĺîď óŕ čóŕŕûpţéď .ďŕévó fîĺé. !!]",
+    "saveError": "[!! Fàîĺéď ţó šàvé ţhé fîĺé. Pĺéàšé ţŕŷ àĝàîñ. !!]",
+    "loadError": "[!! Fàîĺéď ţó ĺóàď ţhé fîĺé. Pĺéàšé ţŕŷ àĝàîñ. !!]",
+    "exportError": "[!! Fàîĺéď ţó éxpóŕţ. Pĺéàšé ţŕŷ àĝàîñ. !!]"
+  }
+}

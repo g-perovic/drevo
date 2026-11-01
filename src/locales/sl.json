@@ -1,0 +1,119 @@
+{
+  "app": {
+    "name": "Drevo",
+    "tagline": "Preprosto ustvarjanje rodovnikov",
+    "milestone": "Mejnik {{milestone}}"
+  },
+  "nav": {
+    "newProject": "Nov projekt",
+    "openProject": "Odpri projekt",
+    "save": "Shrani",
+    "saveAs": "Shrani kot",
+    "export": "Izvozi",
+    "exportPdf": "Izvozi PDF",
+    "exportPng": "Izvozi PNG",
+    "exportSvg": "Izvozi SVG",
+    "settings": "Nastavitve",
+    "language": "Jezik"
+  },
+  "tree": {
+    "addPerson": "Dodaj osebo",
+    "addParent": "Dodaj starša",
+    "addChild": "Dodaj otroka",
+    "addSpouse": "Dodaj zakonca",
+    "addSibling": "Dodaj brata/sestro",
+    "deletePerson": "Izbriši osebo",
+    "fitToScreen": "Prilagodi zaslonu",
+    "zoomIn": "Povečaj",
+    "zoomOut": "Pomanjšaj",
+    "autoLayout": "Samodejna razporeditev",
+    "search": "Išči osebe...",
+    "emptyState": "Še ni dodanih oseb. Začni z dodajanjem prve osebe.",
+    "emptyStateAction": "Dodaj prvo osebo"
+  },
+  "person": {
+    "firstName": "Ime",
+    "middleName": "Srednje ime",
+    "lastName": "Priimek",
+    "maidenName": "Dekliški priimek",
+    "gender": "Spol",
+    "genderMale": "Moški",
+    "genderFemale": "Ženski",
+    "genderOther": "Drugo",
+    "birthDate": "Datum rojstva",
+    "birthPlace": "Kraj rojstva",
+    "deathDate": "Datum smrti",
+    "deathPlace": "Kraj smrti",
+    "isDeceased": "Pokojni/a",
+    "isAlive": "Živi/a",
+    "photo": "Fotografija",
+    "notes": "Opombe",
+    "biography": "Biografija",
+    "present": "Sedanjost",
+    "unknown": "Neznano"
+  },
+  "union": {
+    "marriageDate": "Datum poroke",
+    "marriagePlace": "Kraj poroke",
+    "status": "Status razmerja",
+    "statusMarried": "Poročeni",
+    "statusPartner": "Partner",
+    "statusSeparated": "Ločeni",
+    "statusDivorced": "Razvezani"
+  },
+  "export": {
+    "title": "Izvozi rodovnik",
+    "pdfOptions": "Možnosti PDF",
+    "pageSize": "Velikost strani",
+    "orientation": "Usmerjenost",
+    "orientationLandscape": "Ležeče",
+    "orientationPortrait": "Pokončno",
+    "treeTitle": "Naslov rodovnika",
+    "includeDate": "Vključi datum",
+    "exportButton": "Izvozi",
+    "cancel": "Prekliči"
+  },
+  "actions": {
+    "save": "Shrani",
+    "cancel": "Prekliči",
+    "delete": "Izbriši",
+    "confirm": "Potrdi",
+    "close": "Zapri",
+    "edit": "Uredi",
+    "add": "Dodaj",
+    "undo": "Razveljavi",
+    "redo": "Uveljavi"
+  },
+  "dialogs": {
+    "unsavedChanges": "Imate neshranjene spremembe. Ali želite shraniti pred nadaljevanjem?",
+    "deletePersonTitle": "Izbriši osebo",
+    "deletePersonMessage": "Ali ste prepričani, da želite izbrisati {{name}}? Tega dejanja ni mogoče razveljaviti.",
+    "newProjectTitle": "Nov projekt",
+    "newProjectMessage": "To bo izbrisalo trenutni rodovnik. Nadaljujete?"
+  },
+  "shortcuts": {
+    "title": "Bližnjice na tipkovnici",
+    "save": "Shrani",
+    "undo": "Razveljavi",
+    "redo": "Uveljavi",
+    "delete": "Izbriši izbrano",
+    "search": "Iskanje",
+    "fitToScreen": "Prilagodi zaslonu"
+  },
+  "settings": {
+    "title": "Nastavitve",
+    "language": "Jezik",
+    "theme": "Tema",
+    "themeLight": "Svetla",
+    "themeDark": "Temna",
+    "themeSystem": "Sistemska",
+    "autoSave": "Samodejno shranjevanje",
+    "snapToGrid": "Pritrdi na mrežo"
+  },
+  "errors": {
+    "invalidFile": "Neveljavna ali poškodovana datoteka .drevo.",
+    "saveError": "Shranjevanje datoteke ni uspelo. Prosim, poskusite znova.",
+    "loadError": "Nalaganje datoteke ni uspelo. Prosim, poskusite znova.",
+    "exportError": "Izvoz ni uspel. Prosim, poskusite znova."
+  }
+}

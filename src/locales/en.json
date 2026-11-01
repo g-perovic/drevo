@@ -1,0 +1,119 @@
+{
+  "app": {
+    "name": "Drevo",
+    "tagline": "Simple family tree creation",
+    "milestone": "Milestone {{milestone}}"
+  },
+  "nav": {
+    "newProject": "New Project",
+    "openProject": "Open Project",
+    "save": "Save",
+    "saveAs": "Save As",
+    "export": "Export",
+    "exportPdf": "Export PDF",
+    "exportPng": "Export PNG",
+    "exportSvg": "Export SVG",
+    "settings": "Settings",
+    "language": "Language"
+  },
+  "tree": {
+    "addPerson": "Add Person",
+    "addParent": "Add Parent",
+    "addChild": "Add Child",
+    "addSpouse": "Add Spouse",
+    "addSibling": "Add Sibling",
+    "deletePerson": "Delete Person",
+    "fitToScreen": "Fit to Screen",
+    "zoomIn": "Zoom In",
+    "zoomOut": "Zoom Out",
+    "autoLayout": "Auto Layout",
+    "search": "Search people...",
+    "emptyState": "No people added yet. Start by adding a person.",
+    "emptyStateAction": "Add First Person"
+  },
+  "person": {
+    "firstName": "First Name",
+    "middleName": "Middle Name",
+    "lastName": "Last Name",
+    "maidenName": "Maiden Name",
+    "gender": "Gender",
+    "genderMale": "Male",
+    "genderFemale": "Female",
+    "genderOther": "Other",
+    "birthDate": "Date of Birth",
+    "birthPlace": "Place of Birth",
+    "deathDate": "Date of Death",
+    "deathPlace": "Place of Death",
+    "isDeceased": "Deceased",
+    "isAlive": "Alive",
+    "photo": "Photo",
+    "notes": "Notes",
+    "biography": "Biography",
+    "present": "Present",
+    "unknown": "Unknown"
+  },
+  "union": {
+    "marriageDate": "Date of Marriage",
+    "marriagePlace": "Place of Marriage",
+    "status": "Relationship Status",
+    "statusMarried": "Married",
+    "statusPartner": "Partner",
+    "statusSeparated": "Separated",
+    "statusDivorced": "Divorced"
+  },
+  "export": {
+    "title": "Export Family Tree",
+    "pdfOptions": "PDF Options",
+    "pageSize": "Page Size",
+    "orientation": "Orientation",
+    "orientationLandscape": "Landscape",
+    "orientationPortrait": "Portrait",
+    "treeTitle": "Tree Title",
+    "includeDate": "Include Date",
+    "exportButton": "Export",
+    "cancel": "Cancel"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "close": "Close",
+    "edit": "Edit",
+    "add": "Add",
+    "undo": "Undo",
+    "redo": "Redo"
+  },
+  "dialogs": {
+    "unsavedChanges": "You have unsaved changes. Do you want to save before continuing?",
+    "deletePersonTitle": "Delete Person",
+    "deletePersonMessage": "Are you sure you want to delete {{name}}? This cannot be undone.",
+    "newProjectTitle": "New Project",
+    "newProjectMessage": "This will clear the current tree. Continue?"
+  },
+  "shortcuts": {
+    "title": "Keyboard Shortcuts",
+    "save": "Save",
+    "undo": "Undo",
+    "redo": "Redo",
+    "delete": "Delete selected",
+    "search": "Search",
+    "fitToScreen": "Fit to screen"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
+    "autoSave": "Auto-save",
+    "snapToGrid": "Snap to Grid"
+  },
+  "errors": {
+    "invalidFile": "Invalid or corrupted .drevo file.",
+    "saveError": "Failed to save the file. Please try again.",
+    "loadError": "Failed to load the file. Please try again.",
+    "exportError": "Failed to export. Please try again."
+  }
+}
