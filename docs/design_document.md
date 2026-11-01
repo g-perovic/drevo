@@ -157,22 +157,22 @@ flowchart TD
 
 ### Detailed Job Descriptions
 
-#### Milestone 1: Foundation & Data Layer
+#### Milestone 1: Foundation & Data Layer — ✅ COMPLETED
 *Goal: Establish project baseline, types, data schemas, reactive state management, and multi-language engine.*
 
-- **Job 1.1: Project Setup & Tooling**
+- **Job 1.1: Project Setup & Tooling** — ✅ Done
   - **Prerequisites**: None
   - **Deliverables**: Vite + React 19 + TypeScript + Tailwind CSS setup with Tauri desktop shell configured. Path aliases, linting, and Lucide icon suite installed.
-- **Job 1.2: Data Models & Schema Definition**
+- **Job 1.2: Data Models & Schema Definition** — ✅ Done
   - **Prerequisites**: Job 1.1
   - **Deliverables**: TypeScript interfaces for `Person`, `Union`, `RelationshipType`, `TreeProject`, and `.drevo` file schema with Zod validation.
-- **Job 1.3: Zustand Store & History (Undo / Redo)**
+- **Job 1.3: Zustand Store & History (Undo / Redo)** — ✅ Done
   - **Prerequisites**: Job 1.2
   - **Deliverables**: Global tree store handling add/edit/delete for persons and unions, with temporal middleware for seamless Undo/Redo (`Ctrl+Z` / `Ctrl+Y`) and local auto-save.
-- **Job 1.4: Internationalization (i18n) Engine (EN, SL, Debug Mode)**
+- **Job 1.4: Internationalization (i18n) Engine (EN, SL, Debug Mode)** — ✅ Done
   - **Prerequisites**: Job 1.1
   - **Deliverables**: Multi-language support with English (`en`), Slovenian (`sl`), and Debug/Pseudo-localization mode (`debug`). Shows visual warnings (`⚠️MISSING: key⚠️`) for any untranslated string and allows instant language toggling.
-- **Job 1.5: Test Harness & Core Unit Tests**
+- **Job 1.5: Test Harness & Core Unit Tests** — ✅ Done
   - **Prerequisites**: Job 1.2, Job 1.3, Job 1.4
   - **Deliverables**: Vitest + React Testing Library environment setup. Unit tests for schema validation, person/union relational rules, Zustand store state transitions, and i18n translation key parity checks.
 
