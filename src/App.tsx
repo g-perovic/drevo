@@ -8,6 +8,7 @@ import { useTreeStore, useUndoRedo } from '@/store/treeStore'
 import { handleQuickAdd, type QuickAddType } from '@/utils/relations'
 import { fileSystem } from '@/platform'
 import { TreeProjectSchema } from '@/types/models'
+import { SAMPLE_FAMILY_TREE } from '@/data/sampleTree'
 
 export default function App() {
   const { t } = useTranslation()
@@ -88,6 +89,14 @@ export default function App() {
     setSelectedPersonId(null)
   }, [isDirty, newProject, t])
 
+  const handleLoadSample = useCallback(() => {
+    if (isDirty) {
+      if (!window.confirm(t('dialogs.unsavedChanges'))) return
+    }
+    loadProject(SAMPLE_FAMILY_TREE)
+    setSelectedPersonId(null)
+  }, [isDirty, loadProject, t])
+
   // Trigger auto-layout reset by updating layout setting timestamp
   const handleAutoLayout = useCallback(() => {
     updateMeta({ updatedAt: new Date().toISOString() })
@@ -141,6 +150,7 @@ export default function App() {
         onOpen={handleOpen}
         onNew={handleNew}
         onAutoLayout={handleAutoLayout}
+        onLoadSample={handleLoadSample}
       />
 
       {/* Main Interactive Tree Canvas */}

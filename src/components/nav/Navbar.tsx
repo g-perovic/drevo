@@ -26,6 +26,7 @@ interface NavbarProps {
   onOpen: () => void
   onNew: () => void
   onAutoLayout: () => void
+  onLoadSample: () => void
 }
 
 export function Navbar({
@@ -37,6 +38,7 @@ export function Navbar({
   onOpen,
   onNew,
   onAutoLayout,
+  onLoadSample,
 }: NavbarProps) {
   const { t, i18n } = useTranslation()
   const project = useTreeStore((state) => state.project)
@@ -110,6 +112,13 @@ export function Navbar({
               >
                 <FolderOpen className="w-4 h-4 text-gray-400" />
                 {t('nav.openProject')}
+              </button>
+              <button
+                onClick={onLoadSample}
+                className="w-full flex items-center gap-2.5 px-3 py-2 text-left text-tree-700 hover:bg-tree-50 font-medium"
+              >
+                <TreePine className="w-4 h-4 text-tree-600" />
+                {t('nav.loadSample')}
               </button>
               <div className="my-1 border-t border-gray-100" />
               <button
