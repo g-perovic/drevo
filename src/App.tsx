@@ -4,11 +4,13 @@ import { Navbar } from '@/components/nav/Navbar'
 import { TreeCanvas } from '@/components/canvas/TreeCanvas'
 import { ProfileDrawer } from '@/components/drawer/ProfileDrawer'
 import { ExportPdfModal } from '@/components/export/ExportPdfModal'
+import { ShortcutsModal } from '@/components/shortcuts/ShortcutsModal'
 import { useTreeStore, useUndoRedo } from '@/store/treeStore'
 import { handleQuickAdd, type QuickAddType } from '@/utils/relations'
 import { fileSystem } from '@/platform'
 import { TreeProjectSchema } from '@/types/models'
 import { SAMPLE_FAMILY_TREE } from '@/data/sampleTree'
+import { exportTreeToPng } from '@/utils/imageExport'
 
 export default function App() {
   const { t } = useTranslation()
@@ -24,6 +26,7 @@ export default function App() {
 
   const [selectedPersonId, setSelectedPersonId] = useState<string | null>(null)
   const [showPdfModal, setShowPdfModal] = useState(false)
+  const [showShortcutsModal, setShowShortcutsModal] = useState(false)
 
   // Quick add relative handler
   const onQuickAdd = useCallback(
@@ -97,6 +100,17 @@ export default function App() {
     setSelectedPersonId(null)
   }, [isDirty, loadProject, t])
 
+  const handleExportPng = useCallback(async () => {
+    const viewport = document.querySelector('.react-flow__viewport') as HTMLElement
+    if (!viewport) return
+    try {
+      await exportTreeToPng(viewport, project.meta.title)
+    } catch (err) {
+      console.error('PNG Export failed:', err)
+      alert(t('errors.exportError'))
+    }
+  }, [project.meta.title, t])
+
   // Trigger auto-layout reset by updating layout setting timestamp
   const handleAutoLayout = useCallback(() => {
     updateMeta({ updatedAt: new Date().toISOString() })
@@ -106,6 +120,12 @@ export default function App() {
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       const isInput = ['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)
+
+      // ? -> Open Shortcuts Guide
+      if (e.key === '?' && !isInput) {
+        e.preventDefault()
+        setShowShortcutsModal(true)
+      }
 
       // Ctrl+S / Cmd+S -> Save
       if ((e.ctrlKey || e.metaKey) && e.key === 's') {
@@ -128,9 +148,11 @@ export default function App() {
         redo()
       }
 
-      // Escape -> Deselect person
+      // Escape -> Deselect person / close modals
       if (e.key === 'Escape') {
         setSelectedPersonId(null)
+        setShowShortcutsModal(false)
+        setShowPdfModal(false)
       }
     }
 
@@ -145,12 +167,14 @@ export default function App() {
         onAddPerson={handleAddPerson}
         onSelectPerson={setSelectedPersonId}
         onExportPdf={() => setShowPdfModal(true)}
+        onExportPng={handleExportPng}
         onSave={handleSave}
         onSaveAs={handleSaveAs}
         onOpen={handleOpen}
         onNew={handleNew}
         onAutoLayout={handleAutoLayout}
         onLoadSample={handleLoadSample}
+        onOpenShortcuts={() => setShowShortcutsModal(true)}
       />
 
       {/* Main Interactive Tree Canvas */}
@@ -173,6 +197,12 @@ export default function App() {
         isOpen={showPdfModal}
         onClose={() => setShowPdfModal(false)}
         defaultTitle={project.meta.title}
+      />
+
+      {/* Keyboard Shortcuts Modal */}
+      <ShortcutsModal
+        isOpen={showShortcutsModal}
+        onClose={() => setShowShortcutsModal(false)}
       />
     </div>
   )

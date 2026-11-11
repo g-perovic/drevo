@@ -178,66 +178,69 @@ flowchart TD
 
 ---
 
-#### Milestone 2: Canvas & Tree Layout Engine
+#### Milestone 2: Canvas & Tree Layout Engine — ✅ COMPLETED
 *Goal: Display family relations in a smooth, readable, interactive canvas.*
 
-- **Job 2.1: Canvas Viewport & Controls**
+- **Job 2.1: Canvas Viewport & Controls** — ✅ Done
   - **Prerequisites**: Job 1.3
-  - **Deliverables**: React Flow canvas with Pan, Zoom (mouse wheel & UI controls), Fit-to-Screen button, and subtle grid background.
-- **Job 2.2: Family Auto-Layout Engine**
+  - **Deliverables**: React Flow canvas with Pan, Zoom (mouse wheel & UI controls), Fit-to-Screen button, keyboard zoom +/- controls, and subtle grid background with snap-to-grid.
+- **Job 2.2: Family Auto-Layout Engine** — ✅ Done
   - **Prerequisites**: Job 2.1
-  - **Deliverables**: Algorithmic generation layout engine (hierarchical layout positioning generations top-to-bottom, grouping married pairs horizontally, and distributing children below parents).
-- **Job 2.3: Custom Node & Edge Visuals**
+  - **Deliverables**: Algorithmic generation layout engine (hierarchical layout positioning generations top-to-bottom, grouping married pairs horizontally, chronological sibling birth-year sorting, and distributing children below parents).
+- **Job 2.3: Custom Node & Edge Visuals** — ✅ Done
   - **Prerequisites**: Job 2.2
-  - **Deliverables**: Polished Person Cards (displaying name, lifespan `1920 – 1995`, gender accent, avatar) and smart bezier/orthogonal relationship connectors.
+  - **Deliverables**: Polished Person Cards (displaying name, lifespan `1920 – 1995`, maiden name, generation Roman badge `Gen I/II/III`, gender accent, avatar) and marriage connector labels (💍 year).
 
 ---
 
-#### Milestone 3: Interactive Editing Experience
+#### Milestone 3: Interactive Editing Experience — ✅ COMPLETED
 *Goal: Allow users to build out family branches with minimal clicks.*
 
-- **Job 3.1: Contextual Quick-Add Buttons**
+- **Job 3.1: Contextual Quick-Add Buttons** — ✅ Done
   - **Prerequisites**: Job 2.3
   - **Deliverables**: Hover / selection menu on person cards: `+ Add Parent`, `+ Add Child`, `+ Add Spouse`, `+ Add Sibling`. Automatically creates nodes, links unions, and adjusts layout.
-- **Job 3.2: Member Profile Drawer / Modal**
+- **Job 3.2: Member Profile Drawer / Modal** — ✅ Done
   - **Prerequisites**: Job 1.3, Job 2.3
-  - **Deliverables**: Side panel for editing full details: First, Middle, Last names, Maiden name, Birth/Death dates & locations, photo upload/picker, and biographical notes.
-- **Job 3.3: Manual Drag & Repositioning**
+  - **Deliverables**: Side panel for editing full details: First, Middle, Last names, Maiden name, Birth/Death dates & locations, alive/deceased toggle, and biographical notes.
+- **Job 3.3: Manual Drag & Repositioning** — ✅ Done
   - **Prerequisites**: Job 2.3, Job 3.1
   - **Deliverables**: Ability to drag nodes freely or snap-to-grid, saving custom coordinates while keeping connector lines dynamically attached.
-- **Job 3.4: Search, Navigation & Zoom-to-Node**
+- **Job 3.4: Search, Navigation & Zoom-to-Node** — ✅ Done
   - **Prerequisites**: Job 2.3, Job 3.2
   - **Deliverables**: Top search bar with auto-complete to instantly find any person and smoothly animate camera zoom to their position.
 
 ---
 
-#### Milestone 4: Project Files & PDF Export
+#### Milestone 4: Project Files & PDF Export — ✅ COMPLETED
 *Goal: Ensure project persistence and beautiful printing.*
 
-- **Job 4.1: `.drevo` Project File I/O**
+- **Job 4.1: `.drevo` Project File I/O** — ✅ Done
   - **Prerequisites**: Job 1.2, Job 1.3
   - **Deliverables**: "New Project", "Open Project (.drevo / .json)", "Save", and "Save As". Support File System Access API with standard fallback download.
-- **Job 4.2: High-Res PDF Export Engine**
+- **Job 4.2: High-Res PDF Export Engine** — ✅ Done
   - **Prerequisites**: Job 2.3, Job 4.1
   - **Deliverables**: PDF export modal with preview, paper size selection (A4, A3, Letter, Poster), orientation toggle (Landscape/Portrait), custom title header, date stamp, and multi-page or single-page fit.
-- **Job 4.3: PNG / SVG Image Export**
+- **Job 4.3: PNG / SVG Image Export** — ✅ Done
   - **Prerequisites**: Job 2.3
-  - **Deliverables**: 1-click snapshot export of the current canvas or full tree as crisp PNG or vector SVG.
+  - **Deliverables**: 1-click snapshot export of the current canvas or full tree as crisp PNG image download.
 
 ---
 
 #### Milestone 5: Polish, Packaging & E2E Testing
 *Goal: Deliver a delightful, frictionless out-of-the-box user experience backed by comprehensive tests.*
 
-- **Job 5.1: Starter Templates & Sample Trees**
+- **Job 5.1: Starter Templates & Sample Trees** — ✅ Done
   - **Prerequisites**: Job 4.1
-  - **Deliverables**: Pre-packaged example trees (e.g. 3-generation sample family) and empty starter templates so users can immediately test all features.
-- **Job 5.2: Keyboard Shortcuts & Shortcuts Guide**
+  - **Deliverables**: Pre-packaged example trees (3-generation sample Novak family) and empty starter templates so users can immediately test all features.
+- **Job 5.2: Keyboard Shortcuts & Shortcuts Guide** — ✅ Done
   - **Prerequisites**: Job 3.1, Job 4.1
-  - **Deliverables**: Keybindings for common actions (`Ctrl+S` Save, `Ctrl+Z` Undo, `Ctrl+Y` Redo, `Delete` Remove, `Space+Drag` Pan, `Ctrl+F` Search).
+  - **Deliverables**: Keybindings for common actions (`Ctrl+S` Save, `Ctrl+Z` Undo, `Ctrl+Y` Redo, `+`/`-` Zoom, `0` Fit, `?` Shortcuts Guide modal).
 - **Job 5.3: Windows Desktop Installer (.exe) & Web Build**
   - **Prerequisites**: Job 4.2, Job 5.1
   - **Deliverables**: Tauri desktop release bundle (`Drevo-Setup.exe` installer with custom app icon and `.drevo` file association) + standalone web build target ready for static hosting.
+- **Job 5.4: Playwright End-to-End (E2E) Test Suite**
+  - **Prerequisites**: Job 3.1, Job 3.2, Job 4.1, Job 4.2
+  - **Deliverables**: Automated Playwright browser tests covering full user workflows: tree creation, relation linking, profile edits, i18n language toggling, project file save/reload verification, and PDF generation smoke test.
 - **Job 5.4: Playwright End-to-End (E2E) Test Suite**
   - **Prerequisites**: Job 3.1, Job 3.2, Job 4.1, Job 4.2
   - **Deliverables**: Automated Playwright browser tests covering full user workflows: tree creation, relation linking, profile edits, i18n language toggling, project file save/reload verification, and PDF generation smoke test.

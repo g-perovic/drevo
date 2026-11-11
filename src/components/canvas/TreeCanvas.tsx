@@ -40,10 +40,20 @@ function TreeCanvasInner({
   const project = useTreeStore((state) => state.project)
   const addPerson = useTreeStore((state) => state.addPerson)
   const updatePersonPosition = useTreeStore((state) => state.updatePersonPosition)
-  const { fitView, zoomIn, zoomOut } = useReactFlow()
+  const { fitView, zoomIn, zoomOut, setCenter, getNode } = useReactFlow()
 
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([])
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([])
+
+  // Center camera on selected person (e.g. from search selection or quick-add)
+  useEffect(() => {
+    if (selectedPersonId) {
+      const node = getNode(selectedPersonId)
+      if (node) {
+        setCenter(node.position.x + 110, node.position.y + 45, { zoom: 1.05, duration: 400 })
+      }
+    }
+  }, [selectedPersonId, getNode, setCenter])
 
   // Keyboard navigation for zoom in/out and fit view
   useEffect(() => {

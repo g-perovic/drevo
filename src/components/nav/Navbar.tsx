@@ -13,6 +13,8 @@ import {
   Save,
   Languages,
   ChevronDown,
+  Image as ImageIcon,
+  Keyboard,
 } from 'lucide-react'
 import { useTreeStore, useUndoRedo } from '@/store/treeStore'
 import { getDisplayName } from '@/types/models'
@@ -21,24 +23,28 @@ interface NavbarProps {
   onAddPerson: () => void
   onSelectPerson: (id: string) => void
   onExportPdf: () => void
+  onExportPng: () => void
   onSave: () => void
   onSaveAs: () => void
   onOpen: () => void
   onNew: () => void
   onAutoLayout: () => void
   onLoadSample: () => void
+  onOpenShortcuts: () => void
 }
 
 export function Navbar({
   onAddPerson,
   onSelectPerson,
   onExportPdf,
+  onExportPng,
   onSave,
   onSaveAs,
   onOpen,
   onNew,
   onAutoLayout,
   onLoadSample,
+  onOpenShortcuts,
 }: NavbarProps) {
   const { t, i18n } = useTranslation()
   const project = useTreeStore((state) => state.project)
@@ -146,6 +152,13 @@ export function Navbar({
                 <Download className="w-4 h-4 text-tree-600" />
                 {t('nav.exportPdf')}
               </button>
+              <button
+                onClick={onExportPng}
+                className="w-full flex items-center gap-2.5 px-3 py-2 text-left text-gray-700 hover:bg-gray-50"
+              >
+                <ImageIcon className="w-4 h-4 text-tree-600" />
+                {t('nav.exportPng')}
+              </button>
             </div>
           )}
         </div>
@@ -238,6 +251,15 @@ export function Navbar({
         >
           <UserPlus className="w-3.5 h-3.5" />
           <span>{t('tree.addPerson')}</span>
+        </button>
+
+        {/* Shortcuts Guide Button */}
+        <button
+          onClick={onOpenShortcuts}
+          className="p-1.5 text-gray-600 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors"
+          title={t('shortcuts.title') + ' (?)'}
+        >
+          <Keyboard className="w-4 h-4" />
         </button>
 
         {/* Language Switcher */}
